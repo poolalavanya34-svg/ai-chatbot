@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card-container">
+        <!-- Top Toolbar / Header -->
+        <div class="top-bar">
+            <div class="brand">
+                <span class="bot-icon">🤖</span>
+                <h2>AI Chatbot</h2>
+            </div>
+            <div class="toolbar-actions">
+                <select id="persona-select" class="tool-select" title="Select AI Persona">
+                    <option value="">Default Assistant</option>
+                    <option value="You are an expert software engineer who gives clean, concise code advice.">💻 Code Expert</option>
+                    <option value="You are a funny, casual, and friendly companion.">🎉 Friendly Buddy</option>
+                    <option value="You are a patient and knowledgeable tutor who explains things simply.">📚 Tutor</option>
+                </select>
+                <button id="export-btn" class="tool-btn">📥 Export</button>
+                <button id="theme-toggle-btn" class="tool-btn">🌙 Dark</button>
+                <button id="new-chat-btn" class="tool-btn">+ New Chat</button>
+                <button id="clear-btn" class="tool-btn clear-btn">🧹 Clear</button>
+            </div>
+        </div>
+
+        <!-- Chat History Box -->
+        <div class="history-section">
+            <div class="history-title">📁 Chat History</div>
+            <ul id="history-list" class="history-list">
+                <li class="empty-history">No history yet</li>
+            </ul>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot-message">
+                Hello! 👋 I am your AI Chatbot. How can I help you?
+            </div>
+            
+            <!-- Quick Suggestions -->
+            <div class="suggestions-box">
+                <div class="suggestions-label">✨ Try asking me:</div>
+                <div class="suggestion-pills">
+                    <button class="pill" data-prompt="Explain Python in simple words">🧬 Explain Python</button>
+                    <button class="pill" data-prompt="Give me project ideas for CSE students">💡 Project ideas</button>
+                    <button class="pill" data-prompt="Interview preparation tips">🎯 Interview preparation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <span>AI is thinking...</span>
+        </div>
+
+        <!-- File Preview Bar -->
+        <div id="file-preview-container" class="file-preview-container hidden">
+            <span id="file-name-display"></span>
+            <button id="remove-file-btn" type="button">×</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <input type="file" id="file-input" style="display: none;" accept="image/*,video/*,audio/*,.pdf,.txt,.docx">
+            <button id="attach-btn" class="action-btn attach-btn" title="Attach File/Image/Video/Audio">📎</button>
+            <button id="mic-btn" class="action-btn mic-btn" title="Voice Input">🎙️</button>
+            <textarea id="user-input" placeholder="Type your message here..." rows="1" spellcheck="true"></textarea>
+            <button id="send-btn" class="action-btn send-btn">Send</button>
+            <button id="stop-btn" class="action-btn stop-btn">Stop</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
